@@ -2,7 +2,7 @@ streamlit
 ultralytics
 streamlit-webrtc
 av
-opencv-python-headless
+opencv-python-headless==4.11.0.86
 pandas
 matplotlib
-lap
+lap>=0.5.12
