@@ -5,5 +5,4 @@ av
 opencv-python-headless==4.11.0.86
 pandas
 matplotlib
-lap>=0.5.12
 mediapipe==0.10.35
