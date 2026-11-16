@@ -1,7 +1,8 @@
 streamlit
 ultralytics
-opencv-python-headless
+streamlit-webrtc
+av
+opencv-contrib-python-headless==4.11.0.86
 pandas
-numpy
 matplotlib
-Pillow
+mediapipe==0.10.21
