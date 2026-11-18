@@ -321,8 +321,8 @@ with left_column:
         rtc_configuration=RTC_CONFIGURATION,
         media_stream_constraints={
             "video": {
-                "width": {"ideal": 640},
-                "height": {"ideal": 480},
+                "width": {"ideal":480},
+                "height": {"ideal": 360},
                 "frameRate": {"ideal": 30}
             },
             "audio": False
