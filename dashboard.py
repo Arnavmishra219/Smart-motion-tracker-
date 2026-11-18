@@ -601,7 +601,7 @@ elif page == "Pose Analysis":
         history = data["history"]
         records = data["records"]
         if records:
-            st.session_state["last_records] = records
+            st.session_state["last_records"] = records
 
         if detected:
 
