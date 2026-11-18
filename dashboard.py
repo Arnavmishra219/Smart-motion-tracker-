@@ -600,6 +600,8 @@ elif page == "Pose Analysis":
 
         history = data["history"]
         records = data["records"]
+        if records:
+            st.session_state["last_records] = records
 
         if detected:
 
@@ -713,5 +715,20 @@ elif page == "Pose Analysis":
                 st.info(
                     "Start the webcam to collect session data."
                 )
+                if not pose_ctx.state.playing and st.session_state.get("last_records"):
+                    st.divider()
+                    st.subheader("Last Session Report")
+
+                    saved_df = pd.DataFrame(st.session_state["last_records"])
+
+                    st.download_button(
+                        label="Download Pose Analysis CSV",
+                        data=saved_df.to_csv(index=False),
+                        file_name="pose_analysis_report.csv",
+                        mime="text/csv",
+                        key="pose_saved_download"
+                    )
+
+                    st.caption(f"Total recorded frames: {len(saved_df)}")
 
     update_pose_dashboard()
