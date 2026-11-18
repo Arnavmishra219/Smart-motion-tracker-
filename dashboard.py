@@ -717,7 +717,7 @@ elif page == "Pose Analysis":
                 )
                 
     update_pose_dashboard()
-            update_pose_dashboard()
+    
 
     if not pose_ctx.state.playing and st.session_state.get("last_records"):
         st.divider()
