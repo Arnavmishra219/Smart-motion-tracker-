@@ -202,8 +202,10 @@ def calculate_angle(p1, p2):
 
     dx = p2[0] - p1[0]
     dy = p2[1] - p1[1]
+    angle = math.degrees(math.atan2(dy, dx))
+    return ((angle + 90) % 180) - 90
 
-    return math.degrees(math.atan2(dy, dx))
+    
 
 
 # ==================================================
