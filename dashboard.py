@@ -28,10 +28,36 @@ st.set_page_config(
 st.title("🎯 SmartMotionTracker")
 st.caption("AI-Based Human Pose Analysis")
 
-RTC_CONFIGURATION = RTCConfiguration({
-    "iceServers": [
-        {"urls": ["stun:stun.l.google.com:19302"]}
+# ==================================================
+# WEBRTC CONNECTION (STUN + optional TURN relay)
+# ==================================================
+
+import json
+
+
+def get_ice_servers():
+
+    servers = [
+        {"urls": ["stun:stun.l.google.com:19302"]},
+        {"urls": ["stun:stun1.l.google.com:19302"]},
     ]
+
+    # TURN relay: fixes "connection taking longer than expected"
+    # and choppy video on restricted networks.
+    # Paste the ICE servers array from the Metered dashboard into
+    # Streamlit secrets as ICE_SERVERS_JSON.
+    try:
+        turn_servers = json.loads(st.secrets["ICE_SERVERS_JSON"])
+        servers = list(turn_servers) + servers
+
+    except Exception:
+        pass  # no secret or invalid JSON: use STUN only
+
+    return servers
+
+
+RTC_CONFIGURATION = RTCConfiguration({
+    "iceServers": get_ice_servers()
 })
 
 # ==================================================
@@ -321,9 +347,9 @@ with left_column:
         rtc_configuration=RTC_CONFIGURATION,
         media_stream_constraints={
             "video": {
-                "width": {"ideal":480},
+                "width": {"ideal": 480},
                 "height": {"ideal": 360},
-                "frameRate": {"ideal": 30}
+                "frameRate": {"ideal": 30, "min": 15}
             },
             "audio": False
         },
